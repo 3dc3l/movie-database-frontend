@@ -1,0 +1,297 @@
+@import 'fonts'
+
+$primary = #000
+$secondary = #e40a14
+$white = #FFFFFF66
+$gray = #130D0B66
+
+
+*,
+*:before,
+*:after
+    user-select: text
+    box-sizing: border-box
+    margin: 0
+    -webkit-user-drag: none
+body
+    position: relative
+    overflow-x: hidden
+    background-color: $primary
+    padding: 0
+    margin: 0
+    &.no_click
+        pointer-events: none
+    &.no_scroll
+        overflow-y: hidden
+    &::-webkit-scrollbar
+        width: 15px
+        background-color: transparent
+    &::-webkit-scrollbar-track
+        box-shadow: none
+    &::-webkit-scrollbar-thumb
+        background-color: #e40a14
+        border: 3px solid transparent
+        background-clip: padding-box
+        border-radius: 50px
+textarea
+    &::-webkit-scrollbar
+        width: 10px
+        background-color: transparent
+    &::-webkit-scrollbar-track
+        box-shadow: none
+    &::-webkit-scrollbar-thumb
+        background-color: #e40a14
+        border: 3px solid transparent
+        background-clip: padding-box
+        border-radius: 50px
+.options
+    &::-webkit-scrollbar
+        width: 10px
+        background-color: transparent
+    &::-webkit-scrollbar-track
+        box-shadow: none
+    &::-webkit-scrollbar-thumb
+        background-color: #e40a14
+        border: 3px solid transparent
+        background-clip: padding-box
+        border-radius: 50px
+html
+    -webkit-text-size-adjust: none
+    -webkit-font-smoothing: subpixel-antialiased
+    backface-visibility: hidden
+input,
+input:before,
+input:after,
+textarea,
+textarea:before,
+textarea:after,
+select,
+select:before,
+select:after
+    user-select: initial
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+h1,
+h2,
+h3,
+h4,
+h5
+    font-weight: normal
+
+table
+    width: 100%
+    border-collapse: collapse
+
+img
+    width: auto
+    max-width: 100%
+    {image_default}
+    transition: .3s ease-in-out
+p
+    word-break: break-word
+a
+    text-decoration: none
+
+ul
+    padding: 0
+    list-style-type: none
+    &.terms_ul 
+        margin-left: 45px
+        list-style-type: unset
+        padding: 10px 0
+.no_font
+    font-size: 0
+input,
+select,
+textarea
+    -webkit-appearance: none
+    background-color: transparent
+    box-shadow: none
+    outline: none
+    border: none
+    background-color: $white
+    width: 100%
+&::placeholder
+    color: rgba(0, 0, 0, 0.5)
+    text-transform: none
+a
+    cursor: pointer
+    display: block
+.btn
+    font-family: 'bebas-bold'
+    font-size: 16px
+    letter-spacing: 3px
+
+.page_wrapper
+    width: 100%
+    max-width: 90%
+    padding: 40px 20px
+    margin: 0 auto
+
+.link
+    color: #e40a14
+    text-decoration: underline
+
+/**
+    * Animations */
+.fade_in
+    animation: fade_in .5s
+/*
+*** For transitions
+*/
+.page-enter-active,
+.page-leave-active
+    transition: all .7s ease-in-out
+
+.page-enter,
+.page-leave-to
+    opacity: 0
+
+.slide-enter-active,
+.slide-leave-active
+    transition: all .7s ease-in-out
+
+.slide-enter,
+.slide-leave-to
+    opacity: 0
+    transform: translateY(-20px)
+
+.slideAlt-enter-active,
+.slideAlt-leave-active
+    transition: all .2s ease-in-out
+
+.slideAlt-enter,
+.slideAlt-leave-to
+    opacity: 0
+    visibility: hidden
+    transform: translateY(50px)
+
+.slideAltY-enter-active,
+.slideAltY-leave-active
+    transition: all .2s ease-in-out
+
+.slideAltY-enter,
+.slideAltY-leave-to
+    opacity: 0
+    visibility: hidden
+    transform: translateY(50px) translateX(-50%)
+
+.slideX-enter-active,
+.slideX-leave-active
+    transition: all .7s ease-in-out
+
+.slideX-enter,
+.slideX-leave-to
+    opacity: 0
+    transform: translateX(-10px)
+
+.slideXAlt-enter-active,
+.slideXAlt-leave-active
+    transition: all .7s ease-in-out
+
+.slideXAlt-enter,
+.slideXAlt-leave-to
+    opacity: 0
+    transform: translateX(10px)
+
+.fade_in
+    animation: fade_in .3s
+
+.fade_out
+    animation: fade_out .3s
+
+.slide_from_left
+    animation: slide_from_left .3s
+
+.slide_from_right
+    animation: slide_from_right .3s
+/***
+*Key Frames*/
+// call using this animation animation: bloop 1s linear
+@keyframes fade_in
+    from
+        opacity: 0
+    to
+        opacity: 1
+
+@keyframes fade_out
+    from
+        opacity: 1
+    to
+        opacity: 0
+
+@keyframes slide_from_left
+    from
+        opacity: 0
+        transform: translateX(-100px)
+    to
+        opacity: 1
+        transform: translateX(0px)
+
+@keyframes slide_from_right
+    from
+        opacity: 0
+        transform: translateX(100px)
+    to
+        opacity: 1
+        transform: translateX(0px)
+
+@keyframes slide_from_rightY
+    from
+        opacity: 0
+        transform: translateY(-50%) translateX(100px)
+    to
+        opacity: 1
+        transform: translateY(-50%) translateX(0px)
+
+@keyframes slide_from_bottom
+    from
+        opacity: 0
+        transform: translateY(100px)
+    to
+        opacity: 1
+        transform: translateX(0px)
+
+@keyframes slide_from_top
+    from
+        opacity: 0
+        transform: translateY(-100px)
+    to
+        opacity: 1
+        transform: translateX(0px)
+
+@keyframes loader
+    0%
+        top: 6px
+        height: 51px
+    50%, 100%
+        top: 19px
+        height: 26px
+
+@keyframes blink
+    0%
+        opacity: 1
+    50%, 100%
+        opacity: 0.3
+
+@keyframes dash
+    from
+        stroke-dashoffset: 500
+    to
+        stroke-dashoffset: 0
+
+@keyframes bounce
+    0%
+        top: 30px
+        height: 5px
+        border-radius: 60px 60px 20px 20px
+        transform: scaleX(2)
+    35%
+        height: 15px
+        border-radius: 50%
+        transform: scaleX(1)
+        background-color: $green_alt
+    100%
+        top: 0
