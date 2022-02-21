@@ -19,7 +19,8 @@
     "webpack": "^4.46.0",
     "v-click-outside": "^2.1.5",
     "vue-aos": "^1.1.0",
-    "vue-scrollto": "^2.17.1"
+    "vue-scrollto": "^2.17.1",
+    "vee-validate": "^2.2.15"
   },
   "devDependencies": {
     "stylus": "^0.54.8",

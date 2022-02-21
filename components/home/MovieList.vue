@@ -2,7 +2,7 @@
     <section class="genre">
         <div class="section_header">
         <h3 class="section_title">Genre</h3>
-        <nuxt-link to="/category" class="show_more">See More</nuxt-link>
+        <nuxt-link to="/genre/category" class="show_more">See More</nuxt-link>
         </div>
         <div class="items">
             <div class="item" v-for="count in counter">
