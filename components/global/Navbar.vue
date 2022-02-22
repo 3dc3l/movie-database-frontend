@@ -16,7 +16,18 @@
                         </nuxt-link>
                     </div>
                     <div class="logged_in_out">
-                        <div class="btn sign_in">Sign In</div>
+                        <div v-if="$auth.loggedIn">
+                            <!-- username -->
+                            {{ $auth.user.email }}
+                            <!-- logout button -->
+                            <div class="btn logout">Logout</div>
+                        </div>
+                        <div v-else>
+                            <!-- login -->
+                            <div class="btn sign_in">Login</div>
+                            <!-- register -->
+                            <div class="btn sign_up">Sign Up</div>
+                        </div>
                     </div>
                 </div>
 			</div>
@@ -123,11 +134,10 @@
                     cursor: pointer
             .logged_in_out
                 .btn
-                    &.sign_in
-                        display: inline-block
-                        border-radius: 4px
-                        background-color: #e50914
-                        padding: 7px 17px
-                        font-size: 16px
-                        color: white
+                    display: inline-block
+                    border-radius: 4px
+                    background-color: #e50914
+                    padding: 7px 17px
+                    font-size: 16px
+                    color: white
 </style>

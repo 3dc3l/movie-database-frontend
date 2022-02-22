@@ -7,17 +7,17 @@
             <form class="form" id="action" @submit.prevent="submit()">
                 <div class="group">
                     <label for="email">Email Address</label>
-                    <input type="text" :class="[ 'input', (form.email.length > 0) ? 'filled' : '' ]" name="email" autofocus autocomplete="off" v-model="form.email" v-validate="{ required: true, email: true }">
+                    <input type="text" :class="[ 'input', (form.user.email.length > 0) ? 'filled' : '' ]" name="email" autofocus autocomplete="off" v-model="form.user.email" v-validate="{ required: true, email: true }">
                     <transition name="slide"><span class="validate" v-if="errors.has('email')">{{ properFormat(errors.first('email')) }}</span></transition>
                 </div>
                 <div class="group">
                     <label for="password">Password</label>
-                    <input type="password" ref="password" :class="[ 'input', (form.password.length > 0) ? 'filled' : '' ]" name="password" autocomplete="off" v-model="form.password" v-validate="{ required: true }">
+                    <input type="password" ref="password" :class="[ 'input', (form.user.password.length > 0) ? 'filled' : '' ]" name="password" autocomplete="off" v-model="form.user.password" v-validate="{ required: true }">
                     <transition name="slide"><span class="validate" v-if="errors.has('password')">{{ properFormat(errors.first('password')) }}</span></transition>
                 </div>
                 <div class="group">
                     <label for="password_confirmation">Confirm Password</label>
-                    <input type="password" :class="[ 'input', (form.password_confirmation.length > 0) ? 'filled' : '' ]" name="password_confirmation" autocomplete="off" v-model="form.password_confirmation" v-validate="'required|confirmed:password|min:6'">
+                    <input type="password" :class="[ 'input', (form.user.password_confirmation.length > 0) ? 'filled' : '' ]" name="password_confirmation" autocomplete="off" v-model="form.user.password_confirmation" v-validate="'required|confirmed:password|min:6'">
                     <transition name="slide"><span class="validate" v-if="errors.has('password_confirmation')">{{ properFormat(errors.first('password_confirmation')) }}</span></transition>
                 </div>
                 <div class="buttons">
@@ -34,9 +34,11 @@
             return {
                 loaded: false,
                 form: {
-                    email: '',
-                    password: '',
-                    password_confirmation: ''
+                    user: {
+                        email: 'e@gmaddfsddsddisdsddl.cdom',
+                        password: 'mydpsasswddord',
+                        password_confirmation: 'mydpsasswddord'
+                    }
                 }
             }
         },
@@ -49,11 +51,11 @@
                 const me = this
                 me.$validator.validateAll().then(valid => {
                     if (valid) {
-                     alert("submmitted")
-                     console.log("submitted")
+                        this.$auth.loginWith('local', {
+                            data: this.form
+                        })
                     } else {
-                     alert("ee")
-                     console.log("errrr")
+
                     }
 
                 })
