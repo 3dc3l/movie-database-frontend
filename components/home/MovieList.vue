@@ -1,26 +1,44 @@
 <template>
     <section class="genre">
-        <div class="section_header">
-        <h3 class="section_title">Genre</h3>
-        <nuxt-link to="/genre/category" class="show_more">See More</nuxt-link>
+        <div class="section_header" v-if="isHeaderShow">
+            <h3 class="section_title">{{ genre }}</h3>
+            <nuxt-link to="/genre/category" class="show_more">See More</nuxt-link>
         </div>
         <div class="items">
-            <div class="item" v-for="count in counter">
+            <div class="item" v-for="movie in movies">
             <div class="thumbnail">
-                <img src="images/home/item_thumbnail.jpeg" alt="">
+                <img :src="movie.get_image_url" alt="">
             </div>
             <div class="texts">
-                <p class="title">Jujutsu jaisen</p>
-                <p>Release year: 2019</p>
-                <p>Genre: Action</p>
+                <p class="title">{{ movie.title }}</p>
+                <p>Release year: {{ movie.release_year }}</p>
+                <p>Genre: {{ genre }}</p>
             </div> 
-            <nuxt-link to="/" class="link read_more">Read More</nuxt-link to="">
+            <nuxt-link :to="`${genreSlug}/${movie.slug}`" class="link read_more">Read More</nuxt-link to="">
             </div>
         </div>
 </section>
 </template>
 <script>
     export default {
+      props: {
+          movies: {
+              type: Array,
+              default: null
+          },
+          genre: {
+              type: String,
+              default: null
+          },
+          isHeaderShow: {
+              type: Boolean,
+              default: true
+          },
+          genreSlug: {
+              type: String,
+              default: null
+          }
+      },
       data () {
           return {
               counter: 10

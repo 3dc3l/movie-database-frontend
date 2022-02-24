@@ -2,12 +2,18 @@
     <div class="banner">
         <img src="images/home/banner_large.jpeg" alt="" class="banner_image">
         <div class="main_texts">
-            <h1 class="title">Category title</h1>
+            <h1 class="title">{{ bannerTitle }}</h1>
         </div>
     </div>
 </template>
 <script>
     export default {
+        props: {
+            bannerTitle: {
+                type: String,
+                default: null
+            }
+        },
         data () {
             return {
                 

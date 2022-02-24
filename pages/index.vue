@@ -3,10 +3,7 @@
     <HomeBanner />
     <div class="content">
       <div class="page_wrapper">
-        <MovieList />
-        <MovieList />
-        <MovieList />
-        <MovieList />
+        <MovieList v-for="(genre, key) in res"  :movies="genre.movies" :genre="genre.title" :genreSlug="genre.slug" v-if="genre.movies.length > 0" />
       </div>
     </div>
   </div>
@@ -19,8 +16,21 @@
       },
       data () {
           return {
-              counter: 10
+              counter: 10,
+              res: []
           }
+      },
+      methods: {
+        getData () {
+          this.$axios.get(`/api/genres`).then( res => {
+            this.res = res.data
+          }).catch(err => {
+            console.log(err)
+          })
+        }
+      },
+      mounted () {
+        this.getData()
       }
     }
 </script> 
