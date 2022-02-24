@@ -1,8 +1,8 @@
 <template>
-    <div class="login">
+    <div class="registration">
         <div class="overlay">
             <div class="header">
-                <h1>Sign In</h1>
+                <h1>Sign Up</h1>
             </div>
             <form class="form" id="action" @submit.prevent="submit()">
                 <div class="group">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="buttons">
                     <div class="primary_button outline pointer">Back To Home</div>
-                    <button type="submit" class="btn pointer">Login</button>
+                    <button type="submit" class="btn pointer">Register</button>
                 </div>
             </form>
         </div>
@@ -37,7 +37,8 @@
                     user: {
                         email: 'test@gmail.com',
                         password: 'password',
-                        password_confirmation: 'password'
+                        password_confirmation: 'password',
+                        is_admin: 0
                     }
                 }
             }
@@ -51,12 +52,14 @@
                 const me = this
                 me.$validator.validateAll().then(valid => {
                     if (valid) {
-                        this.$auth.loginWith('local', {
-                            data: this.form
-                        }).then(() => {
-                            this.$router.push('/')
-                        }).catch( err => {
-                            console.log('Invalid credentials. Please try again.')
+                        this.$axios.post('/users', this.form)
+                        .then(() => {
+                            this.$auth.loginWith('local', {
+                                data: this.form
+                            })
+                        })
+                        .catch( err => {
+                            console.log(err.response.data.errors[0].detail.email[0])
                         })
                     } else {
 
@@ -67,13 +70,13 @@
         },
         head () {
             return {
-                title: 'Login | Movie Database'
+                title: 'Registration | Movie Database'
             }
         }
     }
 </script>
 <style lang="stylus">
-    .login
+    .registration
         background-image: url('/images/home/banner_large.jpeg')
         height: calc(100vh - 70px)
         width: 100%

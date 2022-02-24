@@ -78,9 +78,9 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: 'http://127.0.0.1:3000/users/sign_in', method: 'post', propertyName: 'token' },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
+          login: { url: '/users/sign_in', method: 'post', propertyName: 'token' },
+          logout: { url: '/users/sign_out', method: 'delete' },
+          user: { url: '/users/current', method: 'get', propertyName: 'user' }
         }
       }
     }

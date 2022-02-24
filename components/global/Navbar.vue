@@ -6,7 +6,7 @@
 				<ul class="nav_items">
                     <li><nuxt-link to="/">Home</nuxt-link></li>
                     <li><nuxt-link to="/genre">Genre</nuxt-link></li>
-                    <li><nuxt-link to="/my-favorites">My Favorites</nuxt-link></li>
+                    <li><nuxt-link to="/my-favorites" v-if="$auth.loggedIn">My Favorites</nuxt-link></li>
 				</ul>
                 <div class="actions">
                     <div class="quick_search">
@@ -18,15 +18,15 @@
                     <div class="logged_in_out">
                         <div v-if="$auth.loggedIn">
                             <!-- username -->
-                            {{ $auth.user.email }}
+                            <div class="user">{{ $auth.user.email }}</div>
                             <!-- logout button -->
-                            <div class="btn logout">Logout</div>
+                            <div class="btn logout" @click="$auth.logout() ">Logout</div>
                         </div>
                         <div v-else>
                             <!-- login -->
-                            <div class="btn sign_in">Login</div>
+                            <nuxt-link to="/login" class="btn sign_in">Login</nuxt-link>
                             <!-- register -->
-                            <div class="btn sign_up">Sign Up</div>
+                            <nuxt-link to="/register" class="btn sign_up">Sign Up</nuxt-link>
                         </div>
                     </div>
                 </div>
@@ -133,6 +133,16 @@
                     height: 100%
                     cursor: pointer
             .logged_in_out
+                display: flex
+                .user
+                    color: white
+                    font-family: 'bebas'
+                    font-size: 16px
+                    display: inline-block
+                    border-radius: 4px
+                    background-color: #464747
+                    padding: 7px 17px
+                    margin-right: 10px
                 .btn
                     display: inline-block
                     border-radius: 4px
