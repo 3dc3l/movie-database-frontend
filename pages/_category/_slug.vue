@@ -22,7 +22,10 @@
                 </div>
                 <div class="section_content">
                     <div class="create_reviews" v-if="$auth.loggedIn">
-                        <form class="form" id="action" @submit.prevent="createReview()">
+                        <div class="review_toggle" v-if="!show_create">
+                            <div @click="toggleCreateForm()">add review</div>
+                        </div>
+                        <form class="form" id="action" @submit.prevent="createReview()" v-else>
                             <div class="group">
                                 <label for="review">Create Review</label>
                                 <textarea rows="4" type="text" :class="[ 'input', (created_review.content.length > 0) ? 'filled' : '' ]" name="review" autofocus autocomplete="off" v-model="created_review.content" v-validate="{ required: true}"></textarea>
@@ -30,7 +33,7 @@
                             </div>
                             <div class="buttons">
                                 <button type="submit" class="btn pointer">Submit</button>
-                                <div class="btn pointer cancel">Cancel</div>
+                                <div class="btn pointer cancel" @click="toggleCreateForm()">Cancel</div>
                             </div>
                         </form>
                     </div>
@@ -40,12 +43,11 @@
                                 <div class="content">
                                     <p class="name">{{ review.user.email }}</p>
                                     <p class="review_body">{{ review.content }}</p>
-                                    <p class="review_body">{{ review.is_edit }}</p>
                                 </div>
                                 <template v-if="review.user.email == $auth.user.email">
                                     <div class="action">
                                         <div class="btn pointer edit" @click="edit(review)">Edit</div>
-                                        <div class="btn pointer delete">Delete</div>
+                                        <div class="btn pointer delete" @click="toggleModal(review)">Delete</div>
                                     </div>
                                 </template>
                             </template>
@@ -59,7 +61,7 @@
                                         </div>
                                         <div class="buttons">
                                             <button type="submit" class="btn pointer">Update</button>
-                                            <div class="btn pointer cancel">Cancel</div>
+                                            <div class="btn pointer cancel" @click="edit(null)">Cancel</div>
                                         </div>
                                     </form>
                                 </div>
@@ -69,24 +71,31 @@
                 </div>
             </section>
         </div>
+        <DeleteModal v-if="is_show_delete_modal" :reviewToDelete="review_to_delete" />
     </div>
 </template>
 <script>
+    import { mapGetters, mapMutations } from 'vuex'
+
     export default {
         components: {
             Banner: () => import('~/components/category/Banner'),
+            DeleteModal: () => import('~/components/global/DeleteModal'),
         },
         data () {
             return {
                 counter: 10,
                 res: '',
                 created_review: {
-                    content: 'fdfdff',
+                    content: '',
                     user_id: this.$auth.user.id,
                     movie_id: '',
                     rating: 1
                 },
-                reviews: ''
+                reviews: '',
+                is_show_delete_modal: false,
+                review_to_delete: '',
+                show_create: false
             }
         },
         asyncData({$axios, params}) {
@@ -113,6 +122,7 @@
                 })
             },
             edit (selected_review) {
+                this.show_create = false
                 this.getReviewData(selected_review)
             },
             updateReview (updated_review) {
@@ -129,6 +139,16 @@
                     }
                 })
             },
+            toggleModal (selected_review) {
+                this.is_show_delete_modal = !this.is_show_delete_modal
+                this.review_to_delete = selected_review
+            },
+            deleteReview () {
+               this.$axios.delete(`/api/reviews/${this.review_to_delete.id}`).then( res => {
+                   this.is_show_delete_modal = false
+                   this.getReviewData()
+               })
+            },
             getReviewData (selected_review = null) {
                 this.$axios.get(`/api/reviews`).then( res => {
                     this.reviews = res.data
@@ -140,6 +160,10 @@
                         }
                     })
                 })
+            },
+            toggleCreateForm () {
+                this.show_create = !this.show_create
+                this.created_review.content = ''
             }
         },
         mounted () {
@@ -186,8 +210,22 @@
                     display: flex
                     flex-flow: column wrap
                     .create_reviews
+                        color: white
                         padding: 10px
                         margin-bottom: 30px
+                        .review_toggle
+                            font-family: 'bebas-regular'
+                            font-size: 22px
+                            color: white
+                            background-color: gray
+                            padding: 20px
+                            border-radius: 25px
+                            text-align: center
+                            cursor: pointer
+                        label
+                            font-family: 'bebas-regular'
+                            font-size: 22px
+                            color: white
                         textarea
                             background-color: white
                             border-radius: 5px
