@@ -1,8 +1,8 @@
 <template>
     <div class="banner">
-        <img src="images/home/banner_large.jpeg" alt="" class="banner_image">
+        <img :src="bannerImage" alt="" class="banner_image">
         <div class="main_texts">
-            <h1 class="title">{{ bannerTitle }}</h1>
+            <h1 class="title">{{ bannerTitle  }}</h1> 
         </div>
     </div>
 </template>
@@ -10,6 +10,10 @@
     export default {
         props: {
             bannerTitle: {
+                type: String,
+                default: null
+            },
+            bannerImage: {
                 type: String,
                 default: null
             }

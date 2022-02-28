@@ -2,7 +2,7 @@
     <section class="genre">
         <div class="section_header" v-if="isHeaderShow">
             <h3 class="section_title">{{ genre }}</h3>
-            <nuxt-link to="/genre/category" class="show_more">See More</nuxt-link>
+            <nuxt-link :to="genre" class="show_more">See More</nuxt-link>
         </div>
         <div class="items">
             <div class="item" v-for="movie in movies">
@@ -79,11 +79,10 @@
                     background: #181515
                     .thumbnail
                         height: 100%
-                        max-height: 350px
                         overflow: hidden
                         img
                             width: 100%
-                            height: 100%
+                            height: 300px
                             object-fit: cover
                             object-position: center
                     .texts
