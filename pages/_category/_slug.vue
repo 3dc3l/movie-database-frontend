@@ -44,8 +44,8 @@
                                     <p class="name">{{ review.user.email }}</p>
                                     <p class="review_body">{{ review.content }}</p>
                                 </div>
-                                <template v-if="review.user.email == $auth.user.email">
-                                    <div class="action">
+                                <template v-if="$auth.loggedIn">
+                                    <div class="action" v-if="review.user.email == $auth.user.email">
                                         <div class="btn pointer edit" @click="edit(review)">Edit</div>
                                         <div class="btn pointer delete" @click="toggleModal(review)">Delete</div>
                                     </div>
@@ -88,7 +88,7 @@
                 res: '',
                 created_review: {
                     content: '',
-                    user_id: this.$auth.user.id,
+                    user_id: this.$auth.loggedIn ? this.$auth.user.id : 1,
                     movie_id: '',
                     rating: 1
                 },
@@ -113,6 +113,7 @@
                         this.$axios.post('/api/reviews', this.created_review).then(() => {
                             alert('success')
                             this.getReviewData()
+                            this.show_create = false
                         }).catch( err => {
                             alert('err')
                         })

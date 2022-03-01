@@ -80,7 +80,7 @@ export default {
         endpoints: {
           login: { url: '/users/sign_in', method: 'post', propertyName: 'token' },
           logout: { url: '/users/sign_out', method: 'delete' },
-          user: { url: '/users/current', method: 'get', propertyName: 'user' }
+          user: { url: '/users/current', method: 'get', propertyName: ['user'] }
         }
       }
     }
