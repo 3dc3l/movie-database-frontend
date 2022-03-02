@@ -15,7 +15,7 @@
         data () {
             return {
                 counter: 10,
-                res: '',
+                res: [],
                 banner_image: '/images/home/banner_large.jpeg'
             }
         },
@@ -25,6 +25,15 @@
                     res: res.data
                 }
             })
-        }
+        },
+        methods: {
+            getData () {
+                this.$axios.get(`/api/genres/${this.$route.params.category}`).then( res => {
+                    this.res = res.data
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        },
     }
 </script> 
