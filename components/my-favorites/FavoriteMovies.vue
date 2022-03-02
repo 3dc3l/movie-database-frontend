@@ -12,12 +12,12 @@
                 <div class="texts">
                     <p class="title">{{ movie.title }}</p>
                     <p>Release year: {{ movie.release_year }}</p>
-                    <p>Genre: {{ genre }}</p>
+                    <p>Genre: <span v-for="genre in movie.genres">{{genre.title}}</span><span v-if="movie.genres.length > 1">, </span></p>
+                    <div class="btn remove" @click="removeFromList(movie)">Remove</div>
                 </div> 
-                <nuxt-link :to="`${genreSlug}/${movie.slug}`" class="link read_more">Read More</nuxt-link to="">
             </div>
         </div>
-</section>
+    </section>
 </template>
 <script>
     export default {
@@ -34,6 +34,19 @@
             isHeaderShow: false,
           }
       },
+      methods: {
+          removeFromList (movie) {
+              this.$axios.post(`/api/add-remove-favorite`, {
+                user_id: this.$auth.user.id,
+                movie_id: movie.id
+            }).then( res => {
+                //
+                this.$parent.getData()
+            }).catch( err => {
+                console.log(err)
+            })
+          }
+      }
     }
 </script> 
 <style lang="stylus">

@@ -10,10 +10,19 @@
 				</ul>
                 <div class="actions">
                     <div class="quick_search">
-                        <input type="text" placeholder="Search Movie" class="input" @keyup.enter="submit"  v-model="search_query">
+                        <input type="text" placeholder="Search Movie" class="input" @keyup="submit"  v-model="search_query">
                         <nuxt-link to="/quick-search-result" class="search_btn" @click.native="submit()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         </nuxt-link>
+                        <div class="search_result" v-show="results.length >= 1">
+                            <div class="items">
+                                <template v-for="(result, key) in results">
+                                    <div>
+                                        <nuxt-link :to="`/${result.genres[0].slug}/${result.slug}`" class="item" :ke="key">{{ result.title }}</nuxt-link>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
                     </div>
                     <div class="logged_in_out">
                         <div v-if="$auth.loggedIn">
@@ -40,14 +49,23 @@
             return {
                 search_query: '',
                 isMobile: false,
+                results: []
             }
         },
         methods: {
             submit () {
-                alert('submitted')
-                // this.changeQuickSearchQuery(this.search_query)
-                // this.search_query = ''
-                // this.$router.push('/redirecting')
+                if (this.search_query !== '' && this.search_query.length > 2) {
+                    let timeout = null;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        this.$axios.post(`/api/quick-search`,{query: this.search_query}).then( res => {
+                            this.results = res.data
+                        })
+                    }, 800);
+                } else {
+                    this.results = []
+                }
+                console.log(this.search_query)
 			},
         },
     }
@@ -118,6 +136,7 @@
                 border-radius: 20px 
                 padding: 0
                 margin-right: 15px
+                position: relative
                 .input
                     width: 268px
                     background-color: transparent
@@ -132,6 +151,26 @@
                     background-color: #464747
                     height: 100%
                     cursor: pointer
+                .search_result
+                    position: absolute
+                    top: 100%
+                    left: 0
+                    right: 0
+                    width: 100%
+                    height: auto
+                    max-height: 300px
+                    background-color: white
+                    border-radius: 5px
+                    color: black
+                    padding: 20px
+                    .items
+                        display: flex
+                        flex-flow: column wrap
+                        .item
+                            padding: 10px 0
+                            text-decoration: underline
+                            color: black
+                            display: block
             .logged_in_out
                 display: flex
                 .user
