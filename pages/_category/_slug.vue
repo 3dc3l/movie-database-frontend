@@ -151,7 +151,7 @@
                })
             },
             getReviewData (selected_review = null) {
-                this.$axios.get(`/api/reviews`).then( res => {
+                this.$axios.get(`/api/movie-reviews?movie_slug=${ this.$route.params.slug }`).then( res => {
                     this.reviews = res.data
                     res.data.forEach( (item) => {
                         if (selected_review !== null && selected_review.id == item.id) {
