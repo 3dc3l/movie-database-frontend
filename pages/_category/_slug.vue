@@ -99,7 +99,7 @@
             }
         },
         asyncData({$axios, params}) {
-            return $axios.get(`/api/movies/${params.slug}`).then( res => {
+            return $axios.get(`/api/movies-data?id=${params.slug}`).then( res => {
                 return {
                     res: res.data
                 }
