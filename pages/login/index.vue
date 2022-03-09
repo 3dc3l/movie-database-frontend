@@ -67,7 +67,7 @@
         },
         head () {
             return {
-                title: 'Login | Movie Database'
+                title: 'Login | CMS Movie Database'
             }
         }
     }
