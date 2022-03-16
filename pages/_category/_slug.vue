@@ -10,7 +10,7 @@
                     <template v-for="(cast, key) in res.casts">
                         <div class="cast" :key="key">
                             <img :src="cast.get_image_url" alt="">
-                            <div class="name">Real Name: {{ cast.full_name }}</div>
+                            <div class="name">Real Name: {{ cast.first_name + ' ' + cast.middle_name + ' ' +  cast.last_name }}</div>
                             <div class="stage_name">Stage Name: {{ cast.stage_name }}</div>
                         </div>
                     </template>
@@ -111,11 +111,10 @@
                 this.$validator.validateAll().then(valid => {
                     if (valid) {
                         this.$axios.post('/api/reviews', this.created_review).then(() => {
-                            alert('success')
                             this.getReviewData()
                             this.show_create = false
                         }).catch( err => {
-                            alert('err')
+
                         })
                     } else {
                         alert('not valid')

@@ -21,7 +21,6 @@
                     <transition name="slide"><span class="validate" v-if="errors.has('password_confirmation')">{{ properFormat(errors.first('password_confirmation')) }}</span></transition>
                 </div>
                 <div class="buttons">
-                    <div class="primary_button outline pointer">Back To Home</div>
                     <button type="submit" class="btn pointer">Register</button>
                 </div>
             </form>
@@ -58,8 +57,9 @@
                                 data: this.form
                             })
                         })
-                        .catch( err => {
-                            console.log(err.response.data.errors[0].detail.email[0])
+                        .catch(err => {
+                            me.$store.commit('global/catcher/populateErrors', { items: ['Invalid Email or password.'] })
+                            // console.log(err.response.data)
                         })
                     } else {
 

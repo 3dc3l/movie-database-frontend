@@ -21,7 +21,6 @@
                     <transition name="slide"><span class="validate" v-if="errors.has('password_confirmation')">{{ properFormat(errors.first('password_confirmation')) }}</span></transition>
                 </div>
                 <div class="buttons">
-                    <div class="primary_button outline pointer">Back To Home</div>
                     <button type="submit" class="btn pointer">Login</button>
                 </div>
             </form>
@@ -55,9 +54,11 @@
                             data: this.form
                         }).then(() => {
                             this.$router.push('/')
-                        }).catch( err => {
-                            console.log('Invalid credentials. Please try again.')
                         })
+                        .catch(err => {
+                            me.$store.commit('global/catcher/populateErrors', { items: [err.response.data] })
+                        })
+                        
                     } else {
 
                     }

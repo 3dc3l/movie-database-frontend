@@ -4,6 +4,17 @@ $primary = #000
 $secondary = #e40a14
 $white = #FFFFFF66
 $gray = #130D0B66
+$dark_primary = #020F1D
+$black = #111
+$blue = #438EFF
+$red = #EA5455
+$gray = #7A7A7A
+$gray_v2 = #F6F6F6
+$gray_v3 = #C3C3C3
+$gray_v4 = #E2E2E2
+$success = #5cbf69
+$warning = #ffc800
+
 
 
 *,
@@ -164,6 +175,155 @@ a
             right: 17px
             z-index: 1
 
+#dialog
+    position: fixed
+    left: 0
+    z-index: 1024
+    font-family: 'bebas-bold'
+    &.centered
+        .wrapper
+            .content
+                top: 50%
+                transform: translateY(-50%)
+                animation: centered_slide 1s
+    &.overlap
+        z-index: 9999
+    .wrapper
+        position: fixed
+        top: 0
+        left: 0
+        z-index: 1050
+        width: 100%
+        height: 100%
+        outline: 0
+        overflow-x: hidden
+        overflow-y: auto
+        .content
+            position: relative
+            z-index: 1041
+            width: auto
+            max-width: 600px
+            border-radius: 5px
+            margin: 0 auto
+            background-color: white
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3)
+            transform: translateY(50px)
+            animation: basic_slide 1s
+            &.extended
+                max-width: 900px
+            &.secondary
+                .close
+                    background-color: $dark_primary
+                .content_top
+                    color: $dark_primary
+            &.success
+                .close
+                    background-color: $success
+                .content_top
+                    color: $success
+            &.cancel
+                .close
+                    background-color: $red
+                .content_top
+                    color: $red
+            &.warning
+                .close
+                    background-color: $warning
+                .content_top
+                    color: $warning
+            &.info
+                .close
+                    background-color: $blue
+                .content_top
+                    color: $blue
+            &.dark
+                .close
+                    background-color: $gray
+                .content_top
+                    color: $gray
+            .close
+                position: absolute
+                top: -3px
+                right: -3px
+                display: inline-block
+                padding: 5px 10px
+                opacity: 1
+                border-radius: 5px
+                brandon_regular(20px, false)
+                background-color: $primary
+                color: $white
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
+                z-index: 2
+                line-height: 1
+                transition: .3s ease-in-out
+                &:hover
+                    top: -6px
+                    right: -6px
+                    transition: .3s ease-in-out
+            .content_top
+                border-radius: 5px 5px 0 0
+                background-color: rgba(0, 0, 0, 0.05)
+                padding: 10px 20px
+                brandon_medium(20px, false)
+                color: $primary
+            .content_middle
+                padding: 10px 20px
+                brandon_light(16px, false)
+                color: $black
+                .disclaimer
+                    .violator
+                        brandon_light(16px, false)
+                        color: $black
+            .content_bottom
+                border-top: 2px solid rgba(0, 0, 0, 0.05)
+                text-align: right
+                padding: 10px 20px
+    .backdrop
+        position: fixed
+        top: 0
+        z-index: 1040
+        width: 100vw
+        height: 100vh
+        background-color: rgba(0, 0, 0, 0.2)
+
+/**
+ * Buttons */
+.primary_button
+    display: inline-block
+    brandon_medium(14px, true)
+    color: $white
+    padding: 10px 15px
+    border: 1px solid $blue
+    background-color: $blue
+    border-radius: 10px
+    box-shadow: 0 0 20px transparent
+    text-align: center
+    transform: translateY(0)
+    transition: .3s ease-in-out
+    &.rounded
+        border-radius: 50px
+    &.rectangle
+        border-radius: 0px
+    &.outline
+        color: $blue
+        background-color: transparent
+    &.flat
+        color: $blue
+        border: none
+        background-color: transparent
+    &:hover
+        box-shadow: 0 0 20px rgba(0, 132, 176, 0.5)
+        transform: translateY(-5px)
+        transition: .3s ease-in-out
+        &.outline
+            color: $white
+            background-color: $blue
+            transition: .3s ease-in-out
+        &.flat
+            box-shadow: none
+            background-color: rgba(0, 132, 176, 0.2)
+            transition: .3s ease-in-out
+            
 /**
     * Animations */
 .fade_in
