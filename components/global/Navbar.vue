@@ -14,8 +14,8 @@
                         <div class="search_btn" @click="submit()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         </div>
-                        <template v-if="results.length > 0">
-                            <div class="search_result">
+                        <template>
+                            <div class="search_result" v-if="is_show" v-click-outside="hide">
                                 <div class="items">
                                     <template v-for="(result, key) in results">
                                         <div v-if="result.genres.length > 0">
@@ -51,7 +51,8 @@
             return {
                 search_query: '',
                 isMobile: false,
-                results: []
+                results: [],
+                is_show: false
             }
         },
         methods: {
@@ -61,7 +62,8 @@
                     clearTimeout(timeout);
                     timeout = setTimeout(() => {
                         this.$axios.post(`/api/quick-search`,{query: this.search_query}).then( res => {
-                            this.results = res.data
+                            this.results = res.data,
+                            this.is_show = (res.data.length > 0) ? true : false
                         })
                     }, 800);
                 } else {
@@ -69,6 +71,9 @@
                 }
                 console.log(this.search_query)
 			},
+            hide () {
+                this.is_show = false
+            }
         },
     }
 </script>
