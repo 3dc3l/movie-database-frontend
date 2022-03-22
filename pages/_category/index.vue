@@ -2,7 +2,7 @@
     <div class="category">
         <Banner :bannerTitle="res.title" :bannerImage="banner_image" />
         <div class="page_wrapper">
-            <MovieList :movies="res.movies" :genre="res.title" :genreSlug="res.slug" :isHeaderShow="false" />
+            <MovieList :movies="res.movies" :genre="res.title" :genreSlug="res.slug" :isHeaderShow="false" :hasLimit="false" />
         </div>
     </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <div class="banner">
         <img src="images/home/banner_large.jpeg" alt="" class="banner_image">
-        <div class="main_texts">
+        <div class="main_texts" data-aos="fade-up" data-aos-duration="500" data-aos-once="true">
             <h1 class="title">Unlimited Pirated Movies.</h1>
             <p class="label">Watch anywhere. Police everywhere.</p>
         </div>

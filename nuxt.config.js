@@ -29,7 +29,8 @@ export default {
 		// { src: '~/plugins/vue-aos-animation.js', ssr: false },
     { src: '~/plugins/mixins' },
     { src: '~/plugins/vee-validate' },
-    { src: '~/plugins/vue-click-outside' }
+    { src: '~/plugins/vue-click-outside' },
+    { src: '~/plugins/vue-aos-animation.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

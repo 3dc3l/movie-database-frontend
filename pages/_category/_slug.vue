@@ -16,7 +16,7 @@
                     </template>
                 </div>
             </section>
-            <section class="reviews">
+            <section class="reviews" v-if="reviews.length > 0">
                  <div class="section_header">
                     <h3 class="section_title">Reviews</h3>
                 </div>

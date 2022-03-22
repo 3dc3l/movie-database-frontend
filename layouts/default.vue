@@ -9,6 +9,8 @@
 <script>
     import { mapGetters, mapMutations } from 'vuex'
     import Catcher from '~/components/global/Catcher'
+    import AOS from 'aos'
+	import 'aos/dist/aos.css'
 
     export default {
         components: {
@@ -26,6 +28,20 @@
             ...mapGetters({
                 is_show: 'global/modal/is_show_modal'
             })
-        }
+        },
+        mounted () {
+            setTimeout(() => {
+				AOS.init({
+					duration: 1000
+				})
+			}, 1000)
+        },
+        updated () {
+			setTimeout(() => {
+				AOS.init({
+					duration: 1000
+				})
+			}, 1000)
+		}
     }
 </script>       
