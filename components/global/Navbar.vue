@@ -170,6 +170,7 @@
                     border-radius: 5px
                     color: black
                     padding: 20px
+                    z-index: 9
                     .items
                         display: flex
                         flex-flow: column wrap
@@ -182,7 +183,7 @@
                 display: flex
                 .user
                     color: white
-                    font-family: 'bebas'
+                    font-family: 'bebas-bold'
                     font-size: 16px
                     display: inline-block
                     border-radius: 4px
@@ -191,6 +192,7 @@
                     margin-right: 10px
                 .btn
                     display: inline-block
+                    font-family: 'bebas-bold'
                     border-radius: 4px
                     background-color: #e50914
                     padding: 7px 17px

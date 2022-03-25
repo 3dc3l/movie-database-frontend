@@ -3,7 +3,7 @@
     <HomeBanner />
     <div class="content">
       <div class="page_wrapper">
-        <MovieList v-for="(genre, key) in res"  :movies="genre.movies" :genre="genre.title" :genreSlug="genre.slug" v-if="genre.movies.length > 0" />
+        <MovieList v-for="(genre, key) in res"  :movies="genre.movies" :genre="genre.title" :genreSlug="genre.slug" :showFavoriteButton="true" v-if="genre.movies.length > 0" />
       </div>
     </div>
   </div>

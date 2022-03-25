@@ -172,7 +172,9 @@
     }
 </script> 
 <style lang="stylus">
-   .inner_page
+   .inner_page  
+        height: 100%
+        min-height: 852px
         section
             .section_header
                 display: flex
