@@ -16,7 +16,7 @@
                     </template>
                 </div>
             </section>
-            <section class="reviews" v-if="reviews.length > 0">
+            <section class="reviews">
                  <div class="section_header">
                     <h3 class="section_title">Reviews</h3>
                 </div>
@@ -37,7 +37,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="review_items">
+                    <div class="review_items" v-if="reviews.length > 0">
                         <div class="item" v-for="(review, key) in reviews" :key="key">
                             <template v-if="!review.is_edit">
                                 <div class="content">
